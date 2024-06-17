@@ -17,31 +17,34 @@ class MainActivity : AppCompatActivity() {
         binding?.btnCalculate?.setOnClickListener {
             if (binding?.etNumber?.text.toString().trim().isNullOrEmpty()) {
                 binding?.etNumber?.error = "enter the number first"
-            } else {
-                binding?.btnCalculate?.setOnClickListener {
+           } else {
                     var alertDialog = AlertDialog.Builder(this)
-                    alertDialog.setTitle("Perform Calculation on ${binding?.etNumber}")
-                    alertDialog.setMessage("Add ${binding?.etNumber}in number")
-                    alertDialog.setMessage("Sub ${binding?.etNumber}in number")
-                    alertDialog.setMessage("Press reset to set to zero")
+                    alertDialog.setTitle("Perform Calculation on ${binding?.etNumber?.text}")
+                    alertDialog.setMessage("Add ${binding?.etNumber?.text}in number \n Sub ${binding?.etNumber?.text}in number \nPress reset to set to zero")
                     alertDialog.setCancelable(false)
-                    alertDialog.setPositiveButton("Add ${binding?.etNumber}", {_,_->
-                        binding?.etNumber += binding?.etNumber
-                        Toast.makeText(this, "Added ${binding?.etNumber}", Toast.LENGTH_SHORT)
+                    alertDialog.setPositiveButton("Add ${binding?.etNumber?.text}") { _, _ ->
+                        var number = binding?.etNumber?.text?.toString()?.toIntOrNull() ?: 0
+                        binding?.etNumber?.setText((number + number).toString())
+                        Toast.makeText(this, "Added ${binding?.etNumber?.text}", Toast.LENGTH_SHORT)
                             .show()
-                    })
-                    alertDialog.setNegativeButton("Sub ${binding?.etNumber}", { _, _ ->
-                        binding?.etNumber -= binding?.etNumber
-                        Toast.makeText(this, "Subtracted ${binding?.etNumber}", Toast.LENGTH_SHORT)
-                            .show()
-                    })
-                    alertDialog.setNeutralButton("Reset",{ _, _ ->
-                        Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show()
-                    })
-                    alertDialog.show()
+                    }
+                alertDialog.setNegativeButton("Sub ${binding?.etNumber?.text}") { _, _ ->
+                    var number = binding?.etNumber?.text?.toString()?.toIntOrNull() ?: 0
+                    binding?.etNumber?.setText((number - number).toString())
+                    Toast.makeText(
+                        this,
+                        "Subtracted ${binding?.etNumber?.text}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                 }
-            }
-        }
+                alertDialog.setNeutralButton("Reset") { _, _ ->
+                    binding?.etNumber?.setText((0).toString())
+                    Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show()
+                }
+                alertDialog.show()
+           }
+       }
     }
 }
 
