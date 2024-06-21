@@ -21,7 +21,8 @@
         android:hint="@string/enter_any_number"
         android:textSize="@dimen/sp_30"
         android:inputType="numberDecimal"
-        android:layout_margin="@dimen/dp_20"/>
+        android:layout_margin="@dimen/dp_20"
+        />
 <com.google.android.material.button.MaterialButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
